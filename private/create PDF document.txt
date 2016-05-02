@@ -1,0 +1,3 @@
+in a shell in the RStudio project go to the parent directory of odata and use the Rd2pdf command:
+cd ..
+R CMD Rd2pdf odata
