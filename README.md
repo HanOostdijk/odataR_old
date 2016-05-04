@@ -40,7 +40,7 @@ The `$filter`, `$select`, `$skip` and `$top` commands used in the examples 4 and
 
 install.packages("devtools")  
 library(devtools)  
-install_github("HanOostdijk/odata")
+install_github("HanOostdijk/odataR")
 
 ## References
 - A introduction to OData :
