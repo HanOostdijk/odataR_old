@@ -7,13 +7,17 @@
 odataR_set_root(root = NULL)
 }
 \arguments{
-\item{root}{NULL for the default or the url otherwise}
+\item{root}{NULL for the default or the url of the root data structure otherwise}
 }
 \description{
-Determines from which structure the data will be extracted
+Determines from which structure the data will be extracted. If this function is not called
+the default \code{http://opendata.cbs.nl/ODataFeed/OData} (the root for the CBS Statistics Netherlands structures) will be used
 }
 \examples{
 odataR_set_root()
 odataR_set_root('http://opendata.cbs.nl/ODataFeed/OData')
+}
+\seealso{
+\code{\link{odataR_get_root}}
 }
 

@@ -7,10 +7,13 @@
 odataR_get_root()
 }
 \description{
-Determines from which structure the data will be extracted
+Determines from which structure the data will be extracted. If the function odataR_set_root
+is not called yet this will be done first with the default \code{http://opendata.cbs.nl/ODataFeed/OData} (the root for the CBS Statistics Netherlands structures).
 }
 \examples{
 odataR_get_root()
-
+}
+\seealso{
+\code{\link{odataR_set_root}}
 }
 
