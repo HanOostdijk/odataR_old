@@ -13,25 +13,26 @@ odataR_namespaces = c(ns="http://www.w3.org/2005/Atom",
 #' @param query OData query to restrict data returned from structure, See
 #'  \code{\link{odataR_get_table}} for examples of queries
 #' @param save_file_name Name of file to save the XML data in or NULL
+#' @return An \code{XMLInternalDocument} if successful otherwise \code{NULL}
 #' @export
 #' @examples
 #' \dontrun{
-#' odataR_get_data(table_id='82935NED')
-#' odataR_get_data(root='http://opendata.cbs.nl/ODataFeed/OData',table_id='82935NED')
+#' doc = odataR_get_data(table_id='82935NED')
+#' doc = odataR_get_data(root='http://opendata.cbs.nl/ODataFeed/OData',table_id='82935NED')
 #' }
 
 odataR_get_data <- function (
-        root           = odataR_get_root(),
+        root           = odataR_get_root_data(),
         table_id       = NULL,
         query          = NULL,
         save_file_name = NULL) {
   # query  = "?$format=atom&$filter=GeneesmiddelengroepATC eq '100000'"
-  if (!is.null(table_id) && !(substr(table_id, 1, 1) == '\\'))  {
-    table_id = paste0('\\', table_id)
+  if (!is.null(table_id) && !(substr(table_id, 1, 1) == '/'))  {
+    table_id = paste0('/', table_id)
   }
-  f   = paste0(root, table_id, query)
-  f   = URLencode(f)
-  r   = curl::curl_fetch_memory(f)
+  f1  = paste0(root, table_id, query)
+  f1  = URLencode(f1)
+  r   = curl::curl_fetch_memory(f1)
   x   = rawToChar(r$content)
   doc = get_xml_data(x)
   if (!is.null(doc)) {
@@ -61,6 +62,27 @@ get_xml_data <- function(xdata) {
       )
 }
 
+#' List the tables in an OData structure
+#'
+#' List the tables in an OData structure
+#' @param root Root of data structure
+#' @param query OData query to restrict data returned from structure, See
+#'  \code{\link{odataR_get_table}} for examples of queries
+#' @return A data.frame when successful otherwise \code{NULL}
+#' @export
+#' @examples
+#' \dontrun{
+#' odataR_set_root("http://dataderden.cbs.nl")
+#' df_cat = odataR_list_tables()
+#' RIVM   = odataR_list_tables(query="?$filter=Catalog eq 'RIVM'")
+#' }
+
+odataR_list_tables <- function (root = odataR_get_root_catalog(),
+  query = NULL) {
+  odataR_get_subtable(root,query=query)
+}
+
+
 #' Get information about sub tables in OData data structure
 #'
 #' A logical table consists of a some related sub tables. This function returns a named character vector where the names give for each sub table the type and the contents the url of the sub table. This information   can be used by the function \code{\link{odataR_get_subtable}} to retrieve the contents of a sub table
@@ -70,12 +92,12 @@ get_xml_data <- function(xdata) {
 #' @return A named character vector where the names give for each sub table the type and the contents the url of the sub table
 #' @examples
 #' \dontrun{
-#' odataR_get_subtables(table_id='82935NED')
-#' odataR_get_subtables(root='http://opendata.cbs.nl/ODataFeed/OData',table_id='82935NED')
+#' subtabs = odataR_get_subtables(table_id='82935NED')
+#' subtabs = odataR_get_subtables(root='http://opendata.cbs.nl/ODataFeed/OData',table_id='82935NED')
 #' }
 
 odataR_get_subtables <- function (
-        root     = odataR_get_root(),
+        root     = odataR_get_root_data(),
         table_id = NULL) {
   doc   = odataR_get_data(root, table_id)
   m1    = XML::xpathSApply(doc,"//@href/..",
@@ -107,7 +129,7 @@ example_run <- function () {
 #' @examples
 #' \dontrun{
 #' subtabs = odataR_get_subtables(table_id="82935NED")
-#  df      = odataR_get_subtable(subtabs['TypedDataSet'],data_table_fun)
+#  df      = odataR_get_subtable(subtabs['TypedDataSet'],'table')
 #' }
 odataR_get_subtable <- function (
         dsn,
@@ -122,7 +144,8 @@ odataR_get_subtable <- function (
   } else {
     save_file_name = save_XML
   }
-  t1    = odataR_get_data(dsn, NULL, query, save_file_name = save_file_name)
+  t1    = odataR_get_data(dsn, NULL, query=query,
+    save_file_name = save_file_name)
   if (is.null(mt))
     return(t1)
   if (mt=='prop') {
@@ -200,9 +223,12 @@ prop_table_fun <- function(doc) {
 #' @param query OData query to restrict data returned from structure
 #' @param typed Boolean indicating 'TypedDataSet' when T or 'UntypedDataSet' when F'
 #' @param keepcode Character string with dimension(s) for which the coded values are kept
+#' @return A data.frame when successful otherwise \code{NULL}
 #' @export
 #' @section Remark:
 #' See \url{http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html} for details about the query possibilities
+#'
+#' \code{$format=atom} is default so can be omitted, but specifying \code{$format=json} will not work in this context
 #' @examples
 #' \dontrun{
 #' df      = odataR_get_table(table_id="82935NED")
@@ -211,16 +237,16 @@ prop_table_fun <- function(doc) {
 #' df      = odataR_get_table(table_id="82935NED",keepcode = "RegioS",
 #'       query  = "?$format=atom&$filter=startswith(RegioS,'NL01')" )
 #' df      = odataR_get_table(table_id="82935NED",
-#'   query  = paste0("?$format=atom&$filter=startswith(RegioS,'NL01')",
+#'   query  = paste0("?$filter=startswith(RegioS,'NL01')",
 #'                   "&$select=RegioS,Perioden,TotaleInvesteringen_1") )
 #' df      = odataR_get_table(table_id="82935NED",
-#'   query  = paste0("?$format=atom&$filter=startswith(RegioS,'NL01')",
+#'   query  = paste0("?$filter=startswith(RegioS,'NL01')",
 #'                   "&$select=RegioS,Perioden,TotaleInvesteringen_1",
 #'                   "&$skip=2&$top=3") )
 #' }
 
 odataR_get_table <- function(
-    root     = odataR_get_root(),
+    root     = odataR_get_root_data(),
     table_id = NULL,
     query    = NULL,
     typed    = T,

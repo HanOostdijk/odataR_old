@@ -4,8 +4,8 @@
 \alias{odataR_get_table}
 \title{Get table in decoded form}
 \usage{
-odataR_get_table(root = odataR_get_root(), table_id = NULL, query = NULL,
-  typed = T, keepcode = c())
+odataR_get_table(root = odataR_get_root_data(), table_id = NULL,
+  query = NULL, typed = T, keepcode = c())
 }
 \arguments{
 \item{root}{Root of data structure}
@@ -17,6 +17,9 @@ odataR_get_table(root = odataR_get_root(), table_id = NULL, query = NULL,
 \item{typed}{Boolean indicating 'TypedDataSet' when T or 'UntypedDataSet' when F'}
 
 \item{keepcode}{Character string with dimension(s) for which the coded values are kept}
+}
+\value{
+A data.frame when successful otherwise \code{NULL}
 }
 \description{
 The main function is \code{\link{odataR_get_table}} that extracts the information from the database and decodes the dimensions. It uses the other functions in the package behind the screens.
@@ -35,6 +38,8 @@ E.g. when executing \code{df = odataR_get_table(table_id="82935NED")} the follow
 \section{Remark}{
 
 See \url{http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html} for details about the query possibilities
+
+\code{$format=atom} is default so can be omitted, but specifying \code{$format=json} will not work in this context
 }
 \examples{
 \dontrun{
@@ -44,10 +49,10 @@ df      = odataR_get_table(table_id="82935NED",keepcode = c("RegioS","Perioden")
 df      = odataR_get_table(table_id="82935NED",keepcode = "RegioS",
       query  = "?$format=atom&$filter=startswith(RegioS,'NL01')" )
 df      = odataR_get_table(table_id="82935NED",
-  query  = paste0("?$format=atom&$filter=startswith(RegioS,'NL01')",
+  query  = paste0("?$filter=startswith(RegioS,'NL01')",
                   "&$select=RegioS,Perioden,TotaleInvesteringen_1") )
 df      = odataR_get_table(table_id="82935NED",
-  query  = paste0("?$format=atom&$filter=startswith(RegioS,'NL01')",
+  query  = paste0("?$filter=startswith(RegioS,'NL01')",
                   "&$select=RegioS,Perioden,TotaleInvesteringen_1",
                   "&$skip=2&$top=3") )
 }

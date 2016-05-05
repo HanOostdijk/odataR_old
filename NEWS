@@ -1,4 +1,15 @@
-odataR v0.1.1 (Release date: 2016-05-02)
+odataR v0.1.2 (Release date: 2016-05-05)
+==============
+
+Changes:
+
+* Added the function odataR_list_tables that retrieves the list
+  of tables from the catalog
+* The root is now the common ancestor of the data and catalog structures:
+  before now it was e.g. http://opendata.cbs.nl/ODataFeed/OData
+  but now it is http://opendata.cbs.nl
+
+odataR v0.1.1 (Release date: 2016-05-04)
 ==============
 
 Changes:

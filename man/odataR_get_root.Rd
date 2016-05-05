@@ -2,13 +2,13 @@
 % Please edit documentation in R/root.R
 \name{odataR_get_root}
 \alias{odataR_get_root}
-\title{Gets the root for OData data structure}
+\title{Gets the root for OData data and catalog structure}
 \usage{
 odataR_get_root()
 }
 \description{
-Determines from which structure the data will be extracted. If the function odataR_set_root
-is not called yet this will be done first with the default \code{http://opendata.cbs.nl/ODataFeed/OData} (the root for the CBS Statistics Netherlands structures).
+Determines from which structure data and catalog information will be extracted. If the function odataR_set_root
+is not called yet this will be done first with the default \code{http://opendata.cbs.nl} (the root for the CBS Statistics Netherlands structures).
 }
 \examples{
 odataR_get_root()

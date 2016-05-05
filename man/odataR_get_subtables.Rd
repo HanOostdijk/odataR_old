@@ -4,7 +4,7 @@
 \alias{odataR_get_subtables}
 \title{Get information about sub tables in OData data structure}
 \usage{
-odataR_get_subtables(root = odataR_get_root(), table_id = NULL)
+odataR_get_subtables(root = odataR_get_root_data(), table_id = NULL)
 }
 \arguments{
 \item{root}{Root of data structure}
@@ -19,8 +19,8 @@ A logical table consists of a some related sub tables. This function returns a n
 }
 \examples{
 \dontrun{
-odataR_get_subtables(table_id='82935NED')
-odataR_get_subtables(root='http://opendata.cbs.nl/ODataFeed/OData',table_id='82935NED')
+subtabs = odataR_get_subtables(table_id='82935NED')
+subtabs = odataR_get_subtables(root='http://opendata.cbs.nl/ODataFeed/OData',table_id='82935NED')
 }
 }
 

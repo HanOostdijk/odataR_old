@@ -2,20 +2,20 @@
 % Please edit documentation in R/root.R
 \name{odataR_set_root}
 \alias{odataR_set_root}
-\title{Sets the root for OData data structure}
+\title{Sets the root for OData data and catalog structure}
 \usage{
 odataR_set_root(root = NULL)
 }
 \arguments{
-\item{root}{NULL for the default or the url of the root data structure otherwise}
+\item{root}{NULL for the default or the url of the root structure otherwise}
 }
 \description{
-Determines from which structure the data will be extracted. If this function is not called
-the default \code{http://opendata.cbs.nl/ODataFeed/OData} (the root for the CBS Statistics Netherlands structures) will be used
+Determines from which structure data and catalog information  will be extracted. If this function is not called
+the default \code{http://opendata.cbs.nl} (the root for the CBS Statistics Netherlands structures) will be used
 }
 \examples{
 odataR_set_root()
-odataR_set_root('http://opendata.cbs.nl/ODataFeed/OData')
+odataR_set_root('http://opendata.cbs.nl')
 }
 \seealso{
 \code{\link{odataR_get_root}}

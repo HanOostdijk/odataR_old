@@ -4,8 +4,8 @@
 \alias{odataR_get_data}
 \title{Get (part of) an OData data structure}
 \usage{
-odataR_get_data(root = odataR_get_root(), table_id = NULL, query = NULL,
-  save_file_name = NULL)
+odataR_get_data(root = odataR_get_root_data(), table_id = NULL,
+  query = NULL, save_file_name = NULL)
 }
 \arguments{
 \item{root}{Root of data structure}
@@ -17,13 +17,16 @@ odataR_get_data(root = odataR_get_root(), table_id = NULL, query = NULL,
 
 \item{save_file_name}{Name of file to save the XML data in or NULL}
 }
+\value{
+An \code{XMLInternalDocument} if successful otherwise \code{NULL}
+}
 \description{
 This is the only function in the package that actually acquires data from the database. This function returns a block of at most 10000 rows (restriction of the interface) in XML format. It is therefore also suitable in cases where the result is not a nice table (e.g. in the case of TypeInfo). The function \code{\link{odataR_get_table}} will call this function one or more times (depending on the size of the data) and convert the combined data to a table or property structure.
 }
 \examples{
 \dontrun{
-odataR_get_data(table_id='82935NED')
-odataR_get_data(root='http://opendata.cbs.nl/ODataFeed/OData',table_id='82935NED')
+doc = odataR_get_data(table_id='82935NED')
+doc = odataR_get_data(root='http://opendata.cbs.nl/ODataFeed/OData',table_id='82935NED')
 }
 }
 
