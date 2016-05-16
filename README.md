@@ -38,7 +38,7 @@ Same as example5 but the OData server will only return the third, fourth and fif
 The `$filter`, `$select`, `$skip` and `$top` commands used in the examples 4 and further are elements of the query language for OData described in the [OData protocol v4](http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/part1-protocol/odata-v4.0-errata02-os-part1-protocol-complete.html) for version 4 and the [OData protocol v3](
 http://www.odata.org/documentation/odata-version-3-0/odata-version-3-0-core-protocol/) for version 3. **The website of Statistics Netherlands uses version 3.**
 
-## Install odata
+## Install odataR
 
 install.packages("devtools")  
 library(devtools)  
