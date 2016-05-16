@@ -46,6 +46,7 @@ odataR_get_root <- function () {
 #'
 #' Determines from which structure the data will be extracted. Derived from the common OData data and catalog root: \code{paste0(odataR_get_root(), '/ODataFeed/OData')}
 #' @seealso \code{\link{odataR_get_root}} and \code{\link{odataR_get_root_catalog}}
+#' @export
 odataR_get_root_data <- function () {
   paste0(odataR_get_root(), '/ODataFeed/OData')
 }
@@ -54,6 +55,7 @@ odataR_get_root_data <- function () {
 #'
 #' Determines from which structure the catalog information will be extracted. Derived from the common OData data and catalog root: \code{paste0(odataR_get_root(), '/ODataCatalog/Tables')}
 #' @seealso \code{\link{odataR_get_root}} and \code{\link{odataR_get_root_data}}
+#' @export
 odataR_get_root_catalog <- function () {
   paste0(odataR_get_root(), '/ODataCatalog/Tables')
 }

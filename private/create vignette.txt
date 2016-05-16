@@ -1,0 +1,5 @@
+See http://yihui.name/knitr/demo/vignette/
+See http://kbroman.org/pkg_primer/pages/vignettes.html
+
+rmarkdown::render("vignettes/vignette_odataR.rmd", "all")
+devtools::install(build_vignettes = TRUE)

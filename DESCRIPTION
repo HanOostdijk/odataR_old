@@ -1,14 +1,17 @@
 Package: odataR
 Type: Package
 Title: Access to OData information
-Version: 0.1.2
+Version: 0.1.3
 Author: Han Oostdijk
 Maintainer: <han.oostdijk@xs4all.nl>
 Description: Access to OData information.
 License: MIT + file LICENSE
 LazyData: TRUE
-RoxygenNote: 5.0.1.9000
-Imports: XML,
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr
+Suggests: knitr, rmarkdown
+Imports:
+    XML,
     curl,
     dplyr,
     magrittr
