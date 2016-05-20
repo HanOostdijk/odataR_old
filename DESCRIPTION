@@ -1,7 +1,7 @@
 Package: odataR
 Type: Package
 Title: Access to OData information
-Version: 0.1.3
+Version: 0.1.4
 Author: Han Oostdijk
 Maintainer: <han.oostdijk@xs4all.nl>
 Description: Access to OData information.

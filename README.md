@@ -41,8 +41,9 @@ http://www.odata.org/documentation/odata-version-3-0/odata-version-3-0-core-prot
 ## Additional information about odataR
 The folder *private* contains two PDFs with extra information:  
 
-* odataR.pdf is the standard R help information in PDF format that is function oriented
-* vignette_odataR.pdf describes how to use the package in a 'real world' case
+* *odataR.pdf* is the standard R help information in PDF format that is function oriented
+* *vignette_odataR.pdf* describes how to use the package in a 'real world' case
+* *Reading OData with MATLAB.pdf* describes how to replay the example in the vignette in the MATLAB world.
 
 ## Install odataR
 
