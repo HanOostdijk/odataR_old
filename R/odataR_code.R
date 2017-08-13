@@ -271,7 +271,8 @@ couple_data <- function(
   # (e.g. read by odataR_get_subtables)
 ) {
   tt = df %>%
-    dplyr::mutate_each_(dplyr::funs(as.numeric),tv$Key)  #topics -> numeric
+    dplyr::mutate_at(tv$Key,dplyr::funs(as.numeric))  #topics -> numeric (new syntax dplyr mutate)
+    # dplyr::mutate_each_(dplyr::funs(as.numeric),tv$Key)  #topics -> numeric (old syntax dplyr mutate)
   for (dim in dv$Key)  {
     if (dim %in% keepcode ) {
       kc = T
