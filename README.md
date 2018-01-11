@@ -1,6 +1,6 @@
-# odataR
+# odataR_old
 
-NB this package is rather new: so be careful!
+NB this package (based on XML) is replaced by [odDataR](https://github.com/HanOostdijk/odataR.git) based on JSON.
 
 This package gives access to information made available with the OData interface.
 It is tested on the information from Statistics Netherlands and therefore the root has as default the value http://opendata.cbs.nl .  
